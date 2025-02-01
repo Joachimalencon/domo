@@ -29,8 +29,14 @@ DB_DATABASE=${DB_DATABASE:-domo}
 
 # === JWT Configuration ===
 echo -e "\n--- JWT Configuration ---"
-read -sp "Enter the JWT passphrase (default: leave blank for none): " JWT_PASSPHRASE
-echo ""
+read -sp "Enter the JWT passphrase (leave blank to generate one automatically): " JWT_PASSPHRASE
+
+if [ -z "$JWT_PASSPHRASE" ]; then
+  echo -e "\nGenerating a secure passphrase for JWT..."
+  JWT_PASSPHRASE=$(openssl rand -base64 32)
+  echo "Generated JWT passphrase: $JWT_PASSPHRASE"
+  echo -e "⚠️ **Make sure to save this passphrase securely!** ⚠️"
+fi
 
 # === Generate JWT keys ===
 echo -e "\nGenerating JWT keys..."
