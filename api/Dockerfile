@@ -35,4 +35,4 @@ EXPOSE 8000
 
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 
-CMD ["php", "-S", "0.0.0.0:6969", "-t", "public"]
+CMD ["php", "-S", "0.0.0.0:8000", "-t", "public"]

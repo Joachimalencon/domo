@@ -10,6 +10,8 @@ services:
     volumes:
       - ./api:/var/www:cached
       - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - "6969:8000"
     extra_hosts:
       - "host.docker.internal:host-gateway"
     depends_on:
