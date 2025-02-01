@@ -27,6 +27,22 @@ DB_URL=${DB_URL:-host.docker.internal:7070}
 read -p "Enter the database name (default: domo): " DB_DATABASE
 DB_DATABASE=${DB_DATABASE:-domo}
 
+# === JWT Configuration ===
+echo -e "\n--- JWT Configuration ---"
+read -p "Enter the JWT passphrase (default: leave blank for none): " JWT_PASSPHRASE
+
+# === Generate JWT keys ===
+echo -e "\nGenerating JWT keys..."
+
+JWT_KEY_DIR="./api/config/jwt"
+mkdir -p $JWT_KEY_DIR
+
+openssl genrsa -aes256 -passout pass:$JWT_PASSPHRASE -out $JWT_KEY_DIR/private.pem 4096
+
+openssl rsa -in $JWT_KEY_DIR/private.pem -passin pass:$JWT_PASSPHRASE -pubout -out $JWT_KEY_DIR/public.pem
+
+echo "✅ JWT keys generated successfully in $JWT_KEY_DIR"
+
 # === Frontend Configuration ===
 echo -e "\n--- Frontend Configuration ---"
 
@@ -58,7 +74,7 @@ DATABASE_URL="postgresql://$DB_USER:$DB_PASSWORD@$DB_URL/$DB_DATABASE?serverVers
 ###> lexik/jwt-authentication-bundle ###
 JWT_SECRET_KEY=%kernel.project_dir%/config/jwt/private.pem
 JWT_PUBLIC_KEY=%kernel.project_dir%/config/jwt/public.pem
-JWT_PASSPHRASE=
+JWT_PASSPHRASE=$JWT_PASSPHRASE
 ###< lexik/jwt-authentication-bundle ###
 EOT
 
