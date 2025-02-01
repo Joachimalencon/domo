@@ -1,55 +1,74 @@
+# ----- Symfony (/api) -----
+
 # Cache and logs (Symfony2)
-/app/cache/*
-/app/logs/*
-!app/cache/.gitkeep
-!app/logs/.gitkeep
+api/app/cache/*
+api/app/logs/*
+!api/app/cache/.gitkeep
+!api/app/logs/.gitkeep
 
 # Email spool folder
-/app/spool/*
+api/app/spool/*
 
 # Cache, session files and logs (Symfony3)
-/var/cache/*
-/var/logs/*
-/var/sessions/*
-!var/cache/.gitkeep
-!var/logs/.gitkeep
-!var/sessions/.gitkeep
+api/var/cache/*
+api/var/logs/*
+api/var/sessions/*
+!api/var/cache/.gitkeep
+!api/var/logs/.gitkeep
+!api/var/sessions/.gitkeep
 
 # Logs (Symfony4)
-/var/log/*
-!var/log/.gitkeep
+api/var/log/*
+!api/var/log/.gitkeep
 
 # Parameters
-/app/config/parameters.yml
-/app/config/parameters.ini
+api/app/config/parameters.yml
+api/app/config/parameters.ini
 
 # Managed by Composer
-/app/bootstrap.php.cache
-/var/bootstrap.php.cache
-/bin/*
-!bin/console
-!bin/symfony_requirements
-/vendor/
+api/app/bootstrap.php.cache
+api/var/bootstrap.php.cache
+api/bin/*
+!api/bin/console
+!api/bin/symfony_requirements
+api/vendor/
 
 # Assets and user uploads
-/web/bundles/
-/web/uploads/
+api/web/bundles/
+api/web/uploads/
 
 # PHPUnit
-/app/phpunit.xml
-/phpunit.xml
+api/app/phpunit.xml
+api/phpunit.xml
 
 # Build data
-/build/
+api/build/
 
 # Composer PHAR
-/composer.phar
+api/composer.phar
 
 # Backup entities generated with doctrine:generate:entities command
-**/Entity/*~
+**/api/Entity/*~
 
 # Embedded web-server pid file
-/.web-server-pid
+api/.web-server-pid
 
-# Env
-.env
+api/docker-compose-template.yml
+
+# ----- Vue 3 (/front) -----
+
+# Dependency directories
+front/node_modules/
+
+# Production build output
+front/dist/
+!front/dist/.gitkeep
+
+# Local environment files
+front/.env.local
+front/.env.*.local
+
+
+# ----- IDE -----
+
+.idea/
