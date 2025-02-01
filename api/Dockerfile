@@ -21,10 +21,6 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 WORKDIR /var/www
 
-COPY composer.json composer.lock ./
-
-RUN COMPOSER_ALLOW_SUPERUSER=1 composer install --no-interaction --optimize-autoloader
-
 COPY . .
 
 COPY entrypoint.sh /usr/local/bin/entrypoint.sh
