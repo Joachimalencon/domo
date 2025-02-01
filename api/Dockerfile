@@ -21,15 +21,16 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 WORKDIR /var/www
 
-COPY . /var/www
-
-COPY entrypoint.sh /usr/local/bin/entrypoint.sh
-
-RUN chown -R www-data:www-data /var/www && chmod -R 755 /var/www
+COPY composer.json composer.lock ./
 
 RUN COMPOSER_ALLOW_SUPERUSER=1 composer install --no-interaction --optimize-autoloader
 
-RUN chmod +x /usr/local/bin/entrypoint.sh
+COPY . .
+
+COPY entrypoint.sh /usr/local/bin/entrypoint.sh
+
+RUN chown -R www-data:www-data /var/www && chmod -R 755 /var/www \
+    && chmod +x /usr/local/bin/entrypoint.sh
 
 EXPOSE 8000
 
