@@ -19,6 +19,7 @@ DB_USER=${DB_USER:-admin}
 
 read -sp "Enter the database password (default: fJMAC3BJLx8ksQFm): " DB_PASSWORD
 DB_PASSWORD=${DB_PASSWORD:-fJMAC3BJLx8ksQFm}
+echo ""
 
 read -p "Enter the database host (default: host.docker.internal:7070): " DB_URL
 DB_URL=${DB_URL:-host.docker.internal:7070}
@@ -29,6 +30,7 @@ DB_DATABASE=${DB_DATABASE:-domo}
 # === JWT Configuration ===
 echo -e "\n--- JWT Configuration ---"
 read -sp "Enter the JWT passphrase (default: leave blank for none): " JWT_PASSPHRASE
+echo ""
 
 # === Generate JWT keys ===
 echo -e "\nGenerating JWT keys..."
