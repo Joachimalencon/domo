@@ -79,6 +79,15 @@ EOT
 
 echo "✅ API environment configuration written to ./api/.env successfully!"
 
+# === Create symbolic link for Docker Compose ===
+echo -e "\n--- Creating symbolic link for Docker Compose ---"
+if [ ! -L ".env" ]; then
+  ln -s api/.env .env
+  echo "✅ Symbolic link .env -> api/.env created successfully!"
+else
+  echo "ℹ️ Symbolic link .env already exists. Skipping."
+fi
+
 # === Create Frontend .env.production File ===
 cat <<EOT > ./front/.env.production
 VITE_API_URL=$VITE_API_URL
