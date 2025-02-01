@@ -7,7 +7,6 @@ services:
       dockerfile: Dockerfile
     container_name: domo_api
     restart: unless-stopped
-    network_mode: "host"
     volumes:
       - ./api:/var/www:cached
       - /var/run/docker.sock:/var/run/docker.sock
