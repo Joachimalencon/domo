@@ -6,9 +6,24 @@
 ## 🚀 API Setup
 
 1. **Configuration**
-    - You can either:
-        - **Run the setup script**: Execute **`./setup_env.sh`** once to interactively generate the necessary configurations for both API and frontend.
-        - **Or manually update the files** by following the instructions below.
+   - You can either:
+      - **Run the setup script**: Execute **`./setup_env.sh`** once to interactively generate the necessary configurations for both API and frontend.
+      - **Or manually update the files** by following the instructions below. If you do not use the setup script, you must:
+
+   1. **Manually generate the JWT keys**:
+   ```bash
+   sudo mkdir -p api/config/jwt
+   sudo openssl genrsa -out api/config/jwt/private.pem 4096
+   sudo openssl rsa -pubout -in api/config/jwt/private.pem -out api/config/jwt/public.pem
+   ```
+
+   2. **Copy the template environment files**:
+   ```bash
+   cp api/.env.template api/.env
+   cp front/.env.production.template front/.env.production
+   ```
+   Then, update the copied files as needed for your configuration.
+
 
 2. **Manual Update**
     - Open the file: **`/api/.env`**
@@ -19,7 +34,7 @@
    ```
 
 3. **Database credentials**
-    - The default credentials are defined in **`/api/.env`**, but it is **highly recommended** to change them for security purposes:
+   - The default credentials are defined in **`/api/.env`**, but it is **highly recommended** to change them for security purposes:
 
    ```env
    DB_USER=admin  
@@ -33,13 +48,13 @@
 ## 🌐 Frontend Setup
 
 1. **Configuration**
-    - You can either:
-        - **Run the setup script**: Execute **`./setup_env.sh`** once to automatically generate both the **`/api/.env`** and **`/front/.env.production`** files.
-        - **Or manually update the file** by following the instructions below.
+   - You can either:
+      - **Run the setup script**: Execute **`./setup_env.sh`** once to automatically generate both the **`/api/.env`** and **`/front/.env.production`** files.
+      - **Or manually update the file** by following the instructions below.
 
 2. **Manual Update**
-    - Open the file: **`/front/.env.production`**
-    - Set the API URL:
+   - Open the file: **`/front/.env.production`**
+   - Set the API URL:
 
    ```env
    VITE_API_URL=http://your-ip-or-url:6969  

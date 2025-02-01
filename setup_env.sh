@@ -6,6 +6,9 @@ echo "Please provide the necessary configuration for both the API and the fronte
 # === API Configuration ===
 echo -e "\n--- API Configuration ---"
 
+read -p "Enter the API environment (default: dev): " APP_ENV
+APP_ENV=${APP_ENV:-dev}
+
 read -p "Enter the API secret (default: leave blank for none): " APP_SECRET
 
 read -p "Enter the CORS allow origin (default: ^https?://localhost(:[0-9]+)?$): " CORS_ALLOW_ORIGIN
@@ -51,6 +54,12 @@ DB_DATABASE=$DB_DATABASE
 ###> doctrine/doctrine-bundle ###
 DATABASE_URL="postgresql://$DB_USER:$DB_PASSWORD@$DB_URL/$DB_DATABASE?serverVersion=16&charset=utf8"
 ###< doctrine/doctrine-bundle ###
+
+###> lexik/jwt-authentication-bundle ###
+JWT_SECRET_KEY=%kernel.project_dir%/config/jwt/private.pem
+JWT_PUBLIC_KEY=%kernel.project_dir%/config/jwt/public.pem
+JWT_PASSPHRASE=
+###< lexik/jwt-authentication-bundle ###
 EOT
 
 echo "✅ API environment configuration written to ./api/.env successfully!"
