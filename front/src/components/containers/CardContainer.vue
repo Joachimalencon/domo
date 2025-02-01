@@ -13,7 +13,7 @@
       <CardDescription class="truncate">{{ container.Image }}</CardDescription>
     </CardHeader>
     <CardContent class="flex flex-col gap-4">
-      <span>Créé le {{ convertTimestamp(container.Created) }}</span>
+      <span>Created on {{ convertTimestamp(container.Created) }}</span>
       <span>{{ container.Status }}</span>
     </CardContent>
     <CardFooter v-if="!isDomoApi" class="flex gap-4 justify-end">
@@ -43,7 +43,7 @@ const props = defineProps({
   container: {type: Object, required: true},
 });
 
-const isDomoApi = ref(props.container.Names[0] === '/domo_api' || props.container.Names[0] === '/domo_db');
+const isDomoApi = ref(props.container.Names[0] === '/domo_api' || props.container.Names[0] === '/domo_db' || props.container.Names[0] === '/domo_front');
 const loading = ref(false);
 
 function cleanString(string) {
@@ -61,17 +61,16 @@ function convertTimestamp(timestamp) {
 
   const day = date.getUTCDate();
   const monthNames = [
-    "janvier", "février", "mars", "avril", "mai", "juin",
-    "juillet", "août", "septembre", "octobre", "novembre", "décembre"
+    "January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"
   ];
   const month = monthNames[date.getUTCMonth()];
   const year = date.getUTCFullYear();
 
   const hours = String(date.getUTCHours()).padStart(2, '0');
   const minutes = String(date.getUTCMinutes()).padStart(2, '0');
-  const seconds = String(date.getUTCSeconds()).padStart(2, '0');
 
-  return `${day} ${month} ${year} à ${hours}:${minutes}:${seconds}.`;
+  return `${day} ${month} ${year} at ${hours}:${minutes}.`;
 }
 
 function startContainer() {
